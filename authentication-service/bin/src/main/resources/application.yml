@@ -1,0 +1,17 @@
+server:
+    port: 8082
+debug: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://backend-onlineassesmentplatform.ctcflrwdklyd.ap-northeast-1.rds.amazonaws.com/examportaldb
+    username: root
+    password: rootroot
+
+  main:
+    allow-circular-references: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
