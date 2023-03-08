@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.exceptions.ItemsException;
 import com.example.exceptions.OrdersException;
+import com.example.model.Items;
 import com.example.model.Orders;
 import com.example.service.OrdersDaoImpl;
 
@@ -48,5 +52,21 @@ public class OrdersController {
 		Orders updatedOrder = ordersDAOimpl.updateOrder(newOrder, orderId);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(updatedOrder);
+	}
+	
+	@RequestMapping(value = "/byrestaurant/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getOrdersByRestaurantId(@PathVariable Integer id) throws OrdersException{
+		
+		List<Orders> orders = ordersDAOimpl.getOrders(id);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(orders);
+	}
+	
+	@RequestMapping(value = "/viewall", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllOrders() throws OrdersException{
+		
+		List<Orders> orders = ordersDAOimpl.viewAllOrders();
+		
+		return ResponseEntity.status(HttpStatus.OK).body(orders);
 	}
 }

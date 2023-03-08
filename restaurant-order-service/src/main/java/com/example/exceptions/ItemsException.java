@@ -2,13 +2,26 @@ package com.example.exceptions;
 
 public class ItemsException extends Exception {
 	
+	
+	private String message;
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	
 	public ItemsException() {
 	
 	}
 	
-	public ItemsException(String message) {
+	public ItemsException(String msg) {
 		
-		super(message);
+		super(msg);
+		this.message=msg;
 		
 	}
 

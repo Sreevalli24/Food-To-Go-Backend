@@ -1,11 +1,13 @@
 package com.example.service;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.exceptions.ItemsException;
 import com.example.exceptions.OrdersException;
+import com.example.model.Items;
 import com.example.model.Orders;
 import com.example.repository.OrdersRepo;
 
@@ -54,6 +56,35 @@ public class OrdersDaoImpl implements OrdersDao{
 			
 			throw new OrdersException("No such Order found..");
 		}
-	}	
+	}
+
+	@Override
+	public List<Orders> getOrders(Integer id) throws OrdersException {
+		
+		List<Orders> orders = ordersrepo.findByRestaurantId(id);
+		
+		if(orders.isEmpty()) {
+			
+			throw new OrdersException("No Orders Available..");
+
+		}
+		
+		return orders;
+	}
+
+	@Override
+	public List<Orders> viewAllOrders() throws OrdersException {
+		
+		List<Orders> orders = ordersrepo.findAll();
+		
+		if(orders.size() > 0) {
+			
+			return orders;
+			
+		}else {
+			
+			throw new OrdersException("No Orders exist..");
+		}
+	}
 }
 
