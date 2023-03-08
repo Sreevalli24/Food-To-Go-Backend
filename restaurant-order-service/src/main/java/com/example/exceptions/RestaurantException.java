@@ -1,6 +1,6 @@
 package com.example.exceptions;
 
-public class RestaurantException extends RuntimeException{
+public class RestaurantException extends Exception{
 	
 
 	private String message;
